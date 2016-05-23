@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+<!-- ALWAYS use lowercase tags for elements, will work for stricter document types like XHTML -->
+<!-- same with attributes, always lowercase -->
+
+<html lang="en-US">
+<!-- Declare language and dialect for search engines and accesibility applications -->
+
+<head>
+<!--metadata, not displayed-->
+<!--between html and body tag-->
+<!-- contains things like this:
+  <title>My First HTML</title>
+  <meta charset="UTF-8">
+-->
+
+<meta name="description" content="Rebel Fornea's Keto Calculator">
+<meta name="keywords" content="Diet,Keto,Ketogenic,Macro,Macros,Carbohydrate,Calories,Diet Calculator">
+<meta name="author" content="Rebel Fornea">
+<meta charset="UTF-8">
+
+
+<!--<base href="C:\Users\Rebel\Desktop\Jobs\Samples\CowPoop\images" target="_blank">-->
+<!--The <base> element specifies the base URL and base target for all relative URLs in a page-->
+<!--don't have to put "images/" before every image if you make the internet "images" folder the base address-->
+
+
+<title>Keto Macro and Calorie Calculator</title>
+<!-- <title> element in head is metadata, different from title attribute
+defines document title
+might be displayed in browser tab
+-->
+
+<!-- <meta> element is also meta data, defines character set or other 
+details about HTML document
+-->
+
+<!-- <style> used for style sheets and <link> for external style sheets
+also can do internal styling in head element and not link to separate style sheets
+-->
+
+<!--<style>
+body	{background-color:#F0F8FF;}
+h1		{background-color:#cce7ff;color:#ff6666;}
+h2		{background-color:#99cfff;color:#e60000;}
+p		{background-color:#66b8ff;color:#800000;}
+</style>-->
+
+<!--format for external style sheet link:-->
+	<link rel="stylesheet" href="ketoStyles.css">
+
+
+</head>
+
+
+<body onload="refresh()">
+
+<script>
+function refresh() {
+var i = 0;
+while (document.getElementsByTagName("input")[i].id != "") {
+	document.getElementsByTagName("input")[i].value = "";
+	i++;
+}
+
+document.getElementsByTagName("input")[0].value = "";
+document.getElementsById("output").innerHTML = "Macro and calorie totals will update automatically and be displayed here. Pick some food!";
+totalCalories = 0; totalCarbs = 0; totalProtein = 0; totalFat = 0; 
+chickenThighCount = 0; chickenDarkWSkinCount = 0; chickenDarkNoSkinCount = 0;    
+chickenLightWSkinCount = 0; chickenBreastNoSkinCount = 0; chickenBoneBrothCount = 0;    
+chickenTenderloinCount = 0; eggCount = 0; eggWhiteCount = 0; eggYolkCount = 0; 
+salmonFilletCount = 0; canSalmonCount = 0; tunaCount = 0; sardinesCanCount = 0; 
+mackerelCount = 0; shrimpCount = 0; baconCount = 0; beefLiverCount = 0; 
+beefPattyCount = 0; porkRindsCount = 0; porkLoinCount = 0; porkShoulderCount = 0; 
+wheyProteinCount = 0; kaleCount = 0; spinachCount = 0; romaineCount = 0; bellPepperCount = 0; 
+eggPlantCount = 0; whiteMushroomsCount = 0; babyBellaMushroomsCount = 0; squashCount = 0; 
+asparagusCount = 0; brusselSproutsCount = 0; cauliflowerCount = 0; onionCount = 0; 
+frozenSpinachCount = 0; carrotsCount = 0; broccoliFloretsCount = 0; roastedRedPepperCount = 0;    
+bananaPepperCount = 0; genericVegetableCount = 0; avocadoCount = 0; kalamataOlivesCount = 0; 
+strawberriesCount = 0; mulberriesCount = 0; peachesCount = 0; macadamiaNutsCount = 0; 
+almondsCount = 0; hazelnutsCount = 0; peanutsCount = 0; pumpkinSeedsCount = 0; 
+almondButterCount = 0; peanutButterCount = 0; powderedPeanutButterCount = 0; chiaSeedsCount = 0; 
+hempSeedsCount = 0; flaxseedMealCount = 0; coconutFlourCount = 0; almondFlourCount = 0; 
+heavyWhippingCreamCount = 0; almondMilkCount = 0; sourCreamCount = 0; cottageCheeseCount = 0; 
+creamCheeseCount = 0; goudaCount = 0; jarlsbergCount = 0; mozzarellaCount = 0; parmesanCount = 0; 
+butterCount = 0; mayonnaiseCount = 0; coconutOilCount = 0; gheeCount = 0; oliveOilCount = 0;
+ranchDressingCount = 0; caeserDressingCount = 0; greekDressingCount = 0; italianDressingCount = 0;
+blueCheeseDressingCount = 0; worcestshireCount = 0; srirachaMayoCount = 0; pestoCount = 0;
+vanillaExtractCount = 0; bakingCocoaCount = 0; bakersChocolateCount = 0; psylliumHuskCount = 0;
+}
+</script>
+
+<h1>Keto Macro and Calorie Tracker</h1>
+
+<p id="firstParagraph">Welcome to my personal macro calculator! The ketogenic diet is a low-carb, high-fat diet that teaches your body to 
+burn body fat for fuel instead of glucose. On the ketogenic diet, it is a good rule of thumb to stay below
+20 net grams of carbohydrates a day and to eat at a caloric deficit of 250-500 calories per day. Visit <a href="https://www.reddit.com/r/keto">the r/keto subreddit</a>
+for more information on the ketogenic diet and use <a href="http://www.iifym.com/tdee-calculator/">this page</a> or <a href="https://tdeecalculator.net/">this page</a> to figure out your total daily energy expenditure in an 
+average day. <br /><br />
+This tool contains the foods that <i>I</i> most commonly eat. Feel free to view the page source information for this page, copy the HTML file and save it, and make changes to the HTML and Javascript 
+to suit your own personal dietary habits. </p>
+
+<p id="output">Macro and calorie totals will update automatically and be displayed here. Pick some food!</p>
+
+
+
+<table>
+<tr class="heading">
+<th class="headingName">Proteins</th>
+<th class="headingInput">Servings</th>
+<th class="headingName">Vegetables</th>
+<th class="headingInput">Servings</th>
+<th class="headingName">Nuts/Seeds</th>
+<th class="headingInput">Servings</th>
+<th class="headingName">Dairy</th>
+<th class="headingInput">Servings</th>
+</tr>
+<tr>
+<td class="foodNames">Chicken thigh (1 whole):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chickenThigh" id="chickenThigh" value="" onchange="chickenThighChange(value)"><br \></td>
+<td class="foodNames">Kale (85 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="kale" id="kale" value="" onchange="kaleChange(value)"><br \></td>
+<td class="foodNames">Macadamia Nuts (28 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="macadamiaNuts" id="macadamiaNuts" value="" onchange="macadamiaNutsChange(value)"><br \></td>
+<td class="foodNames">Heavy whipping cream (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="heavyWhippingCream" id="heavyWhippingCream" value="" onchange="heavyWhippingCreamChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Chicken, dark, with skin (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chickenDarkWSkin" id="chickenDarkWSkin" value="" onchange="chickenDarkWSkinChange(value)"><br \></td>
+<td class="foodNames">Spinach (85 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="spinach" id="spinach" value="" onchange="spinachChange(value)"><br \></td>
+<td class="foodNames">Almonds (28 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="almonds" id="almonds" value="" onchange="almondsChange(value)"><br \></td>
+<td class="foodNames">Almond milk (1 cup):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="almondMilk" id="almondMilk" value="" onchange="almondMilkChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Chicken, dark, no skin (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chickenDarkNoSkin" id="chickenDarkNoSkin" value="" onchange="chickenDarkNoSkinChange(value)"><br \></td>
+<td class="foodNames">Romaine lettuce (85 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="romaine" id="romaine" value="" onchange="romaineChange(value)"><br \></td>
+<td class="foodNames">Hazelnuts (22 nuts):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="hazelnuts" id="hazelnuts" value="" onchange="hazelnutsChange(value) "><br \></td>
+<td class="foodNames">Sour cream (2 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="sourCream" id="sourCream" value="" onchange="sourCreamChange(value) "><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Chicken, light, with skin (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chickenLightWSkin" id="chickenLightWSkin" value="" onchange="chickenLightWSkinChange(value)"><br \></td>
+<td class="foodNames">Bell pepper (92 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="bellPepper" id="bellPepper" value="" onchange="bellPepperChange(value)"><br \></td>
+<td class="foodNames">Peanuts (28 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="peanuts" id="peanuts" value="" onchange="peanutsChange(value)"><br \></td>
+<td class="foodNames">Cottage cheese (1/2 cup):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="cottageCheese" id="cottageCheese" value="" onchange="cottageCheeseChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Chicken breast, no skin (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chickenBreastNoSkin" id="chickenBreastNoSkin" value="" onchange="chickenBreastNoSkinChange(value)"><br \></td>
+<td class="foodNames">Eggplant (82 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="eggPlant" id="eggPlant" value="" onchange="eggPlantChange(value)"><br \></td>
+<td class="foodNames">Pumpkin seeds (28 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="pumpkinSeeds" id="pumpkinSeeds" value="" onchange="pumpkinSeedsChange(value)"><br \></td>
+<td class="foodNames">Cream cheese (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="creamCheese" id="creamCheese" value="" onchange="creamCheeseChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Chicken bone broth (1 cup):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chickenBoneBroth" id="chickenBoneBroth" value="" onchange="chickenBoneBrothChange(value)"><br \></td>
+<td class="foodNames">White mushrooms (100 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="whiteMushrooms" id="whiteMushrooms" value="" onchange="whiteMushroomsChange(value)"><br \></td>
+<td class="foodNames">Almond butter (2 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="almondButter" id="almondButter" value="" onchange="almondButterChange(value)"><br \></td>
+<td class="foodNames">Gouda (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="gouda" id="gouda" value="" onchange="goudaChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Chicken tenderloin (4 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chickenTenderloin" id="chickenTenderloin" value="" onchange="chickenTenderloinChange(value)"><br \></td>
+<td class="foodNames">Baby bella mushrooms (100 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="babyBellaMushrooms" id="babyBellaMushrooms" value="" onchange="babyBellaMushroomsChange(value)"><br \></td>
+<td class="foodNames">Peanut butter (2 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="peanutButter" id="peanutButter" value="" onchange="peanutButterChange(value)"><br \></td>
+<td class="foodNames">Jarlsberg (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="jarlsberg" id="jarlsberg" value="" onchange="jarlsbergChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Egg (1 egg):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="egg" id="egg" value="" onchange="eggChange(value)"><br \></td>
+<td class="foodNames">Squash (100 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="squash" id="squash" value="" onchange="squashChange(value)"><br \></td>
+<td class="foodNames">Powdered peanut butter (2 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="powderedPeanutButter" id="powderedPeanutButter" value="" onchange="powderedPeanutButterChange(value)"><br \></td>
+<td class="foodNames">Mozzarella (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="mozzarella" id="mozzarella" value="" onchange="mozzarellaChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Egg white (1 white):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="eggWhite" id="eggWhite" value="" onchange="eggWhiteChange(value)"><br \> </td>
+<td class="foodNames">Asparagus (6 spears):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="asparagus" id="asparagus" value="" onchange="asparagusChange(value)"><br \> </td>
+<td class="foodNames">Chia seeds (3 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="chiaSeeds" id="chiaSeeds" value="" onchange="chiaSeedsChange(value)"><br \> </td>
+<td class="foodNames">Parmesan (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="parmesan" id="parmesan" value="" onchange="parmesanChange(value)"><br \> </td>
+</tr>
+<tr>
+<td class="foodNames">Egg yolk (1 yolk):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="eggYolk" id="eggYolk" value="" onchange="eggYolkChange(value)"><br \></td>
+<td class="foodNames">Brussels sprouts (88 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="brusselsSprouts" id="brusselsSprouts" value="" onchange="brusselsSproutsChange(value)"><br \></td>
+<td class="foodNames">Hemp seeds (3 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="hempSeeds" id="hempSeeds" value="" onchange="hempSeedsChange(value)"><br \> </td>
+<td class="empty"></td>
+<td class="empty"></td>
+</tr>
+<tr>
+<td class="foodNames">Salmon fillet (4 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="salmonFillet" id="salmonFillet" value="" onchange="salmonFilletChange(value)"><br \></td>
+<td class="foodNames">Cauliflower (100 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="cauliflower" id="cauliflower" value="" onchange="cauliflowerChange(value)"><br \></td>
+<td class="empty"></td>
+<td class="empty"></td>
+<th class="headingName">Baking Goods</th>
+<td class="nextToCategory"></td>
+</tr>
+<tr>
+<td class="foodNames">Salmon, canned (168 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="canSalmon" id="canSalmon" value="" onchange="canSalmonChange(value)"><br \></td>
+<td class="foodNames">Onion, white (80 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="onion" id="onion" value="" onchange="onionChange(value)"><br \></td>
+<th class="headingName">Flours</th>
+<td class="nextToCategory"></td>
+<td class="foodNames">Psyllium husk (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="psylliumHusk" id="psylliumHusk" value="" onchange="psylliumHuskChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Salmon, canned (168 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="canSalmon" id="canSalmon" value="" onchange="canSalmonChange(value)"><br \></td>
+<td class="foodNames">Spinach, frozen (81 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="frozenSpinach" id="frozenSpinach" value="" onchange="frozenSpinachChange(value)"><br \></td>
+<td class="foodNames">Flaxseed meal (2 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="flaxseedMeal" id="flaxseedMeal" value="" onchange="flaxseedMealChange(value)"><br \></td>
+<td class="foodNames">Baker's chocolate (14 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="bakersChocolate" id="bakersChocolate" value="" onchange="bakersChocolateChange(value)"><br \></td>
+</tr> 
+<tr>
+<td class="foodNames">Salmon, canned (168 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="canSalmon" id="canSalmon" value="" onchange="canSalmonChange(value)"><br \></td>
+<td class="foodNames">Carrots (85 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="carrots" id="carrots" value="" onchange="carrotsChange(value)"><br \></td>
+<td class="foodNames">Coconut flour (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="coconutFlour" id="coconutFlour" value="" onchange="coconutFlourChange(value)"><br \></td>
+<td class="foodNames">Baking cocoa (1 Tbs:&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="bakingCocoa" id="bakingCocoa" value="" onchange="bakingCocoaChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Tuna, canned (168 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="tuna" id="tuna" value="" onchange="tunaChange(value)"><br \></td>
+<td class="foodNames">Broccoli florets (94 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="broccoliFlorets" id="broccoliFlorets" value="" onchange="broccoliFloretsChange(value)"><br \></td>
+<td class="foodNames">Almond flour (1/4 Cup):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="almondFlour" id="almondFlour" value="" onchange="almondFlourChange(value)"><br \></td>
+<td class="foodNames">Vanilla extract (1 tsp):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="vanillaExtract" id="vanillaExtract" value="" onchange="vanillaExtractChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Sardines (1 can):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="sardines" id="sardines" value="" onchange="sardinesCanChange(value)"><br \></td>
+<td class="foodNames">Roasted red pepper (1 pepper):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="roastedRedPepper" id="roastedRedPepper" value="" onchange="roastedRedPepperChange(value)"><br \></td>
+<td class="empty"></td>
+<td class="empty"></td>
+<td class="empty"></td>
+<td class="empty"></td>
+</tr>
+<tr>
+<td class="foodNames">Shrimp (4 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="shrimp" id="shrimp" value="" onchange="shrimpChange(value) "><br \></td>
+<td class="foodNames">Banana peppers (28 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="bananaPepper" id="bananaPepper" value="" onchange="bananaPepperChange(value)"><br \></td>
+<th class="headingName">Fats</th>
+<td class="nextToCategory"></td>
+<th class="headingName">Sauces</th>
+<td class="nextToCategory"></td>
+</tr>
+<tr>
+<td class="foodNames">Mackerel, canned (75 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="mackerel" id="mackerel" value="" onchange="mackerelChange(value) "><br \></td>
+<td class="foodNames">General vegetable (85 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="genericVegetable" id="genericVegetable" value="" onchange="genericVegetableChange(value) "><br \></td>
+<td class="foodNames">Butter (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="butter" id="butter" value="" onchange="butterChange(value)"><br \></td>
+<td class="foodNames">Ranch dressing (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="ranchDressing" id="ranchDressing" value="" onchange="ranchDressingChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Bacon, thick-cut (3 slices):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="bacon" id="bacon" value="" onchange="baconChange(value)"><br \></td>
+<td class="empty"></td>
+<td class="empty"></td>
+<td class="foodNames">Mayonnaise (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="mayonnaise" id="mayonnaise" value="" onchange="mayonnaiseChange(value)"><br \></td>
+<td class="foodNames">Caeser dressing (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="caeserDressing" id="caeserDressing" value="" onchange="caeserDressingChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Beef liver (4 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="beefLiver" id="beefLiver" value="" onchange="beefLiverChange(value)"><br \></td>
+<th class="headingName">Fruits</th>
+<td class="nextToCategory"></td>
+<td class="foodNames">Coconut oil (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="coconutOil" id="coconutOil" value="" onchange="coconutOilChange(value)"><br \></td>
+<td class="foodNames">Greek dressing (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="greekDressing" id="greekDressing" value="" onchange="greekDressingChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Beef patty (3.5 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="beefPatty" id="beefPatty" value="" onchange="beefPattyChange(value)"><br \></td>
+<td class="foodNames">Avocado (whole avocado):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="avocado" id="avocado" value="" onchange="avocadoChange(value)"><br \></td>
+<td class="foodNames">Ghee (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="ghee" id="ghee" value="" onchange="gheeChange(value)"><br \></td>
+<td class="foodNames">Italian (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="italianDressing" id="italianDressing" value="" onchange="italianDressingChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Pork rinds (1 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="porkRinds" id="porkRinds" value="" onchange="porkRindsChange(value)"><br \>  </td>
+<td class="foodNames">Kalamata olives (4 olives):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="kalamataOlives" id="kalamataOlives" value="" onchange="kalamataOlivesChange(value)"><br \></td>
+<td class="foodNames">Olive Oil (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="oliveOil" id="oliveOil" value="" onchange="oliveOilChange(value)"><br \></td>
+<td class="foodNames">Blue cheese dressing (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="blueCheese" id="blueCheese" value="" onchange="blueCheeseChange(value)"><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Pork loin (4 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="porkLoin" id="porkLoin" value="" onchange="porkLoinChange(value) "><br \></td>
+<td class="foodNames">Strawberries (140 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="strawberries" id="strawberries" value="" onchange="strawberriesChange(value)"><br \></td>
+<td class="empty"></td>
+<td class="empty"></td>
+<td class="foodNames">Pesto (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="pesto" id="pesto" value="" onchange="pestoChange(value) "><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Pork shoulder (4 oz):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="porkShoulder" id="porkShoulder" value="" onchange="porkLoinChange(value)"><br \></td>
+<td class="foodNames">Mulberries (140 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="mulberries" id="mulberries" value="" onchange="mulberriesChange(value)"><br \></td>
+<td class="empty"></td>
+<td class="empty"></td>
+<td class="foodNames">Worcestshire (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="worcestshire" id="worcestshire" value="" onchange="worcestshireChange(value) "><br \></td>
+</tr>
+<tr>
+<td class="foodNames">Whey protein (37 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="wheyProtein" id="wheyProtein" value="" onchange="wheyProteinChange(value)"><br \></td>
+<td class="foodNames">Peaches (140 g):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="peaches" id="peaches" value="" onchange="peachesChange(value)"><br \></td>
+<td class="empty"></td>
+<td class="empty"></td>
+<td class="foodNames">Sriracha Mayo (1 Tbs):&#160;&#160;</td>
+<td class="inputBoxes"><input type="text" name="srirachaMayo" id="srirachaMayo" value="" onchange="srirachaMayoChange(value) "><br \></td>
+</tr>
+
+</table>
+  
+<p id="footer">By Rebel Fornea <br/>2016</p>
+
+<script>
+
+var totalCalories = 0, totalCarbs = 0, totalProtein = 0, totalFat = 0;
+
+var chickenThighCount = 0, chickenDarkWSkinCount = 0, chickenDarkNoSkinCount = 0,    
+chickenLightWSkinCount = 0, chickenBreastNoSkinCount = 0, chickenBoneBrothCount = 0,    
+chickenTenderloinCount = 0, eggCount = 0, eggWhiteCount = 0, eggYolkCount = 0, 
+salmonFilletCount = 0, canSalmonCount = 0, tunaCount = 0, sardinesCanCount = 0, 
+mackerelCount = 0, shrimpCount = 0, baconCount = 0, beefLiverCount = 0, 
+beefPattyCount = 0, porkRindsCount = 0, porkLoinCount = 0, porkShoulderCount = 0, 
+wheyProteinCount = 0, kaleCount = 0, spinachCount = 0, romaineCount = 0, bellPepperCount = 0, 
+eggPlantCount = 0, whiteMushroomsCount = 0, babyBellaMushroomsCount = 0, squashCount = 0, 
+asparagusCount = 0, brusselSproutsCount = 0, cauliflowerCount = 0, onionCount = 0, 
+frozenSpinachCount = 0, carrotsCount = 0, broccoliFloretsCount = 0, roastedRedPepperCount = 0,    
+bananaPepperCount = 0, genericVegetableCount = 0, avocadoCount = 0, kalamataOlivesCount = 0, 
+strawberriesCount = 0, mulberriesCount = 0, peachesCount = 0, macadamiaNutsCount = 0, 
+almondsCount = 0, hazelnutsCount = 0, peanutsCount = 0, pumpkinSeedsCount = 0, 
+almondButterCount = 0, peanutButterCount = 0, powderedPeanutButterCount = 0, chiaSeedsCount = 0, 
+hempSeedsCount = 0, flaxseedMealCount = 0, coconutFlourCount = 0, almondFlourCount = 0, 
+heavyWhippingCreamCount = 0, almondMilkCount = 0, sourCreamCount = 0, cottageCheeseCount = 0, 
+creamCheeseCount = 0, goudaCount = 0, jarlsbergCount = 0, mozzarellaCount = 0, parmesanCount = 0, 
+butterCount = 0, mayonnaiseCount = 0, coconutOilCount = 0, gheeCount = 0, oliveOilCount = 0,
+ranchDressingCount = 0, caeserDressingCount = 0, greekDressingCount = 0, italianDressingCount = 0,
+blueCheeseDressingCount = 0, worcestshireCount = 0, srirachaMayoCount = 0, pestoCount = 0,
+vanillaExtractCount = 0, bakingCocoaCount = 0, bakersChocolateCount = 0, psylliumHuskCount = 0;
+
+function chickenThighChange(param) { var change = param - chickenThighCount;   
+	chickenThighCount = param;   recalculate(change,201,0,21,12.9); }
+
+function chickenDarkWSkinChange(param) { var change = param - chickenDarkWSkinCount;   
+	chickenDarkWSkinCount = param;   recalculate(change,71,0,7,4); }
+	
+function chickenDarkNoSkinChange(param) { var change = param - chickenDarkNoSkinCount;   
+	chickenDarkNoSkinCount = param;   recalculate(change,57,0,8,3); }
+
+function chickenLightWSkinChange(param) { var change = param - chickenLightWSkinCount;   
+	chickenLightWSkinCount = param;   recalculate(change,62,0,8,3); }
+
+function chickenBreastNoSkinChange(param) { var change = param - chickenBreastNoSkinCount;   
+	chickenBreastNoSkinCount = param;   recalculate(change,42,0,9,1); }
+	
+function chickenBoneBrothChange(param) { var change = param - chickenBoneBrothCount;   
+	chickenBoneBrothCount = param;   recalculate(change,c,c,p,f); }
+
+function chickenTenderloinChange(param) { var change = param - chickenTenderloinCount;   
+	chickenTenderloinCount = param;   recalculate(change,110,0,25,1); }
+	
+function eggChange(param) { var change = param - eggCount;   
+	eggCount = param;   recalculate(change,78,.6,6,5); }	
+	
+function eggWhiteChange(param) { var change = param - eggWhiteCount;   
+	eggWhiteCount = param;   recalculate(change,20,.2,3.6,.1); }
+	
+function eggYolkChange(param) { var change = param - eggYolkCount;   
+	eggYolkCount = param;   recalculate(change,58,.6,2.7,4.5); }
+	
+function salmonFilletChange(param) { var change = param - salmonFilletCount;   
+	salmonFilletCount = param;   recalculate(change,140,0,23,4.5); }	
+	
+function canSalmonChange(param) { var change = param - canSalmonCount;   
+	canSalmonCount = param;   recalculate(change,180,0,39,3); }
+	
+function tunaChange(param) { var change = param - tunaCount;   
+	tunaCount = param;   recalculate(change,180,0,45,1.5); }
+	
+function sardinesCanChange(param) { var change = param - sardinesCanCount;   
+	sardinesCanCount = param;   recalculate(change,140,2,15,8); }
+
+function shrimpChange(param) { var change = param - shrimpCount;   
+	shrimpCount = param;   recalculate(change,112,0,24,1.33); }
+	
+function mackerelChange(param) { var change = param - mackerelCount;   
+	mackerelCount = param;   recalculate(change,121,0,17.33,5.33); }
+	
+function baconChange(param) { var change = param - baconCount;   
+	baconCount = param;   recalculate(change,210,0,15,15); }
+
+function beefLiverChange(param) { var change = param - beefLiverCount;   
+	beefLiverCount = param;   recalculate(change,160,4,24,4); }
+	
+function beefPattyChange(param) { var change = param - beefPattyCount;   
+	beefPattyCount = param;   recalculate(change,269,0,26,18); }
+
+function porkRindsChange(param) { var change = param - porkRindsCount;   
+	porkRindsCount = param;   recalculate(change,160,.5,18,10); }
+
+function porkLoinChange(param) { var change = param - porkLoinCount;   
+	porkLoinCount = param;   recalculate(change,150,0,28,3.5); }
+
+function porkShoulderChange(param) { var change = param - porkShoulderCount;   
+	porkShoulderCount = param;   recalculate(change,303,0,28,21); }
+	
+function wheyProteinChange(param) { var change = param - wheyProteinCount;   
+	wheyProteinCount = param;   recalculate(change,140,1,30,1); }
+
+function kaleChange(param) { var change = param - kaleCount;   
+	kaleCount = param;   recalculate(change,42,5.4,2.2,0.5); }
+
+function spinachChange(param) { var change = param - spinachCount;   
+	spinachCount = param;   recalculate(change,20,0.8,1.8,0.2); }
+
+function romaineChange(param) { var change = param - romaineCount;   
+	romaineCount = param;   recalculate(change,15,2,1,0.5); }
+	
+function bellPepperChange(param) { var change = param - bellPepperCount;   
+	bellPepperCount = param;   recalculate(change,20,4.5,1,0); }
+	
+function eggPlantChange(param) { var change = param - eggPlantCount;   
+	eggPlantCount = param;   recalculate(change,20,2.3,0.8,0.1); }
+
+function whiteMushroomsChange(param) { var change = param - whiteMushroomsCount;   
+	whiteMushroomsCount = param;   recalculate(change,22,1.25,3.09,0.34); }
+	
+function babyBellaMushroomsChange(param) { var change = param - babyBellaMushroomsCount;   
+	babyBellaMushroomsCount = param;   recalculate(change,22,2.6,2.1,0.34); }
+	
+function squashChange(param) { var change = param - squashCount;   
+	squashCount = param;   recalculate(change,17,3.5,1.2,0.3); }
+	
+function asparagusChange(param) { var change = param - asparagusCount;   
+	asparagusCount = param;   recalculate(change,24,2,2,0); }
+	
+function brusselsSproutsChange(param) { var change = param - brusselsSproutsCount;   
+	brusselsSproutsCount = param;   recalculate(change,38,5,3,0); }
+	
+function cauliflowerChange(param) { var change = param - cauliflowerCount;   
+	cauliflowerCount = param;   recalculate(change,25,2,2,0); }
+	
+function onionChange(param) { var change = param - onionCount;   
+	onionCount = param;   recalculate(change,32,5.6,0.8,0); }
+	
+function frozenSpinachChange(param) { var change = param - frozenSpinachCount;   
+	frozenSpinachCount = param;   recalculate(change,30,2,2,0); }
+	
+function carrotsChange(param) { var change = param - carrotsCount;   
+	carrotsCount = param;   recalculate(change,35,5,0.5,0); }
+	
+function broccoliFloretsChange(param) { var change = param - broccoliFloretsCount;   
+	broccoliFloretsCount = param;   recalculate(change,30,2,4,0); }
+
+function roastedRedPepperChange(param) { var change = param - roastedRedPepperCount;   
+	roastedRedPepperCount = param;   recalculate(change,30,5,1,0); }
+	
+function bananaPepperChange(param) { var change = param - bananaPepperCount;   
+	bananaPepperCount = param;   recalculate(change,10,2,0,0); }
+	
+function genericVegetableChange(param) { var change = param - genericVegetableCount;   
+	genericVegetableCount = param;   recalculate(change,10,2,0,0.1); }
+	
+function avocadoChange(param) { var change = param - avocadoCount;   
+	avocadoCount = param;   recalculate(change,322,4,4,29); }
+	
+function kalamataOlivesChange(param) { var change = param - kalamataOlivesCount;   
+	kalamataOlivesCount = param;   recalculate(change,40,1,0,4); }
+	
+function strawberriesChange(param) { var change = param - strawberriesCount;   
+	strawberriesCount = param;   recalculate(change,50,10,0,0); }
+	
+function mulberriesChange(param) { var change = param - mulberriesCount;   
+	mulberriesCount = param;   recalculate(change,60,12,2,1); }
+	
+function peachesChange(param) { var change = param - peachesCount;   
+	peachesCount = param;   recalculate(change,60,11,1,0); }
+	
+function macadamiaNutsChange(param) { var change = param - macadamiaNutsCount;   
+	macadamiaNutsCount = param;   recalculate(change,232,2,2,24); }
+	
+function almondsChange(param) { var change = param - almondsCount;   
+	almondsCount = param;   recalculate(change,170,2,6,15); }
+	
+function hazelnutsChange(param) { var change = param - hazelnutsCount;   
+	hazelnutsCount = param;   recalculate(change,194,2,4,18); }
+	
+function peanutsChange(param) { var change = param - peanutsCount;   
+	peanutsCount = param;   recalculate(change,170,3,8,15); }
+	
+function pumpkinSeedsChange(param) { var change = param - pumpkinSeedsCount;   
+	pumpkinSeedsCount = param;   recalculate(change,157,2,8,13); }
+	
+function almondButterChange(param) { var change = param - almondButterCount;   
+	almondButterCount = param;   recalculate(change,210,4,6,18); }
+	
+function peanutButterChange(param) { var change = param - peanutButterCount;   
+	peanutButterCount = param;   recalculate(change,190,6,7,16); }
+	
+function powderedPeanutButterChange(param) { var change = param - powderedPeanutButterCount;   
+	powderedPeanutButterCount = param;   recalculate(change,22.5,1.5,2.5,0.75); }
+	
+function chiaSeedsChange(param) { var change = param - chiaSeedsCount;   
+	chiaSeedsCount = param;   recalculate(change,150,2,5,9); }
+	
+function hempSeedsChange(param) { var change = param - hempSeedsCount;   
+	hempSeedsCount = param;   recalculate(change,170,0,10,13); }
+	
+function flaxseedMealChange(param) { var change = param - flaxseedMealCount;   
+	flaxseedMealCount = param;   recalculate(change,60,1,3,3.5); }
+
+function coconutFlourChange(param) { var change = param - coconutFlourCount;   
+	coconutFlourCount = param;   recalculate(change,37.5,2,1.5,1.25); }
+
+function almondFlourChange(param) { var change = param - almondFlourCount;   
+	almondFlourCount = param;   recalculate(change,160,3,6,14); }	
+	
+function heavyWhippingCreamChange(param) { var change = param - heavyWhippingCreamCount;   
+	heavyWhippingCreamCount = param;   recalculate(change,52,0,0,5); }
+	
+function almondMilkChange(param) { var change = param - almondMilkCount;   
+	almondMilkCount = param;   recalculate(change,30,0,1,2.5); }
+
+function sourCreamChange(param) { var change = param - sourCreamCount;   
+	sourCreamCount = param;   recalculate(change,60,2,1,6); }
+
+function cottageCheeseChange(param) { var change = param - cottageCheeseCount;   
+	cottageCheeseCount = param;   recalculate(change,95,4,13,3); }
+	
+function creamCheeseChange(param) { var change = param - creamCheeseCount;   
+	creamCheeseCount = param;   recalculate(change,90,2,2,9); }
+	
+function goudaChange(param) { var change = param - goudaCount;   
+	goudaCount = param;   recalculate(change,101,0,7,9); }
+
+function jarlsbergChange(param) { var change = param - jarlsbergCount;   
+	jarlsbergCount = param;   recalculate(change,100,0,7,8); }
+	
+function mozzarellaChange(param) { var change = param - mozzarellaCount;   
+	mozzarellaCount = param;   recalculate(change,78,1,6,6); }
+
+function parmesanChange(param) { var change = param - parmesanCount;   
+	parmesanCount = param;   recalculate(change,122,1,9,8); }
+
+function butterChange(param) { var change = param - butterCount;   
+	butterCount = param;   recalculate(change,100,0,0,11); }
+	
+function mayonnaiseChange(param) { var change = param - mayonnaiseCount;   
+	mayonnaiseCount = param;   recalculate(change,90,0,0,10); }
+	
+function coconutOilChange(param) { var change = param - coconutOilCount;   
+	coconutOilCount = param;   recalculate(change,117,0,0,14); }
+	
+function gheeChange(param) { var change = param - gheeCount;   
+	gheeCount = param;   recalculate(change,120,0,0,14); }
+	
+function oliveOilChange(param) { var change = param - oliveOilCount;   
+	oliveOilCount = param;   recalculate(change,112,0,0,14); }
+	
+function ranchDressingChange(param) { var change = param - ranchDressingCount;   
+	ranchDressingCount = param;   recalculate(change,90,0.5,0,10); }
+	
+function caeserDressingChange(param) { var change = param - caeserDressingCount;   
+	caeserDressingCount = param;   recalculate(change,82,0.5,0.5,9); }
+	
+function greekDressingChange(param) { var change = param - greekDressingCount;   
+	greekDressingCount = param;   recalculate(change,50,0.5,0,6.5); }
+	
+function italianDressingChange(param) { var change = param - italianDressingCount;   
+	italianDressingCount = param;   recalculate(change,22.5,0.5,0,2.25); }
+	
+function blueCheeseChange(param) { var change = param - blueCheeseCount;   
+	blueCheeseCount = param;   recalculate(change,70,0.5,0,7.5); }
+
+function pestoChange(param) { var change = param - pestoCount;   
+	pestoCount = param;   recalculate(change,75,1.25,1,7); }
+
+function worcestshireChange(param) { var change = param - worcestshireCount;   
+	worcestshireCount = param;   recalculate(change,15,3,0,0); }
+	
+function srirachaMayoChange(param) { var change = param - srirachaMayoCount;   
+	srirachaMayoCount = param;   recalculate(change,90,0,0,10); }
+
+function psylliumHuskChange(param) { var change = param - psylliumHuskCount;   
+	psylliumHuskCount = param;   recalculate(change,20,2,0,0); }
+	
+function bakersChocolateChange(param) { var change = param - bakersChocolateCount;   
+	bakersChocolateCount = param;   recalculate(change,90,1,2,7); }
+	
+function bakingCocoaChange(param) { var change = param - bakingCocoaCount;   
+	bakingCocoaCount = param;   recalculate(change,10,2,1,0.5); }
+	
+function vanillaExtractChange(param) { var change = param - vanillaExtractCount;   
+	vanillaExtractCount = param;   recalculate(change,12.6,0.5,0,0); }
+
+
+function recalculate(multiplier,calories,carbs,protein,fat) {
+	totalCalories += multiplier * calories;
+	totalCarbs += multiplier * carbs;
+	totalProtein += multiplier * protein;
+	totalFat += multiplier * fat;
+	document.getElementById("output").innerHTML = "Total calories:&#160;&#160;" + totalCalories.toFixed(1) + 
+	"&#160;&#160;&#160;&#160;Total Net Carbs:&#160;&#160;" + totalCarbs.toFixed(1) + " g" +
+	"&#160;&#160;&#160;&#160;Total Protein:&#160;&#160;" + totalProtein.toFixed(1) + " g" +
+	"&#160;&#160;&#160;&#160;Total Fat:&#160;&#160;" + totalFat.toFixed(1) + " g";
+}
+</script>
+
+
+</body>
+
+</html>
